@@ -1,5 +1,5 @@
-// SampleTexto
-// A class to create synths form a sound files in a folder
+// SampleTexto2
+// Clase para crear synths desde sonidos de una carpeta
 
 SampleTexto2 {
 
@@ -12,7 +12,7 @@ SampleTexto2 {
 		^super.new.init;
 	}
 
-	// Read folder of Recordings path (lee carpetas del directorio Recordings)
+	// Lee el folder sampletexto. Hay que crearlo manualmente o cambiar por otro.
 	init { |server, path = "/sampletexto/"|
 
 		sampleDictionary = Dictionary.new;
@@ -20,28 +20,28 @@ SampleTexto2 {
 		sampleDictionary.add(\smp -> PathName(path).entries.collect({ |grabacion| Buffer.read(server ? Server.default, grabacion.fullPath) }));
 	}
 
-	// Create a mono Dictionary and a stereo Dictionary (crea un diccionario mono y uno estéreo)
+	// Crea un diccionario mono y uno estéreo.
 	stsel {
 		sampleMonoDictionary = sampleDictionary[\smp].select{ |item| item.numChannels == 1 };
 		sampleStereoDictionary = sampleDictionary[\smp].select{ |item| item.numChannels == 2 };
 	}
 
-	// Read sounds from the general Dictionary (lee sonidos de la carpeta general)
+	// Lee sonidos de la carpeta general.
 	st { |num1 = 0|
 		^this.sampleDictionary[\smp][num1];
 	}
 
-	// Read sounds from mono Dictionary (lee sonidos de la carpeta mono)
+	// Lee sonidos de la carpeta mono.
 	stm { |num2 = 0|
 		^this.sampleMonoDictionary[num2];
 	}
 
-	// Read sounds from stereo Dictionary (lee sonidos de la carpeta estéreo)
+	// Lee sonidos de la carpeta estéreo.
 	sts { |num3 = 0|
 		^this.sampleStereoDictionary[num3];
 	}
 
-	// Create mono synths from mono Dictionary (crear Synths del diccionario mono)
+	// Create mono synths from mono Dictionary (crea Synths del diccionario mono)
 	monosynth {|num = (sampleMonoDictionary.size - 1)|
 			(0..num).do{|it|
 				this.sampleMonoDictionary[it].normalize;
