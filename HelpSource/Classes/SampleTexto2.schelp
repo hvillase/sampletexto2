@@ -1,7 +1,7 @@
 TITLE:: SampleTexto2
 summary:: Read sound samples by index.
 categories:: Undocumented classes
-related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff
+related:: Classes/Buffer
 
 DESCRIPTION::
 Reads the sound files of a folder by its index. By default reads the folder called <sampletexto>.
@@ -59,7 +59,7 @@ argument:: server
 argument:: path
 
 METHOD:: st
-argument:: num1: index number of the sound in the folder.
+argument:: num1
 
 METHOD:: sampleDictionary
 
